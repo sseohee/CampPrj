@@ -18,9 +18,7 @@
          <v-container>
         
          <Map />
-
-         <Searchlist/>
-
+         
          </v-container>
        </SplitArea>
      </split>
