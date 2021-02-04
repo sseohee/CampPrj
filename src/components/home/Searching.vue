@@ -15,8 +15,7 @@
                   clearable
                   label="Departure"
                   type="text"
-                  @click:append="toggleMarker"
-                  @click:append-outer="sendMessage"
+                  @click:append="getMylocation" 
                   @click:clear="clearMessage"
                 ></v-text-field>
               </v-col>
@@ -37,8 +36,7 @@
                   clearable
                   label="Arrival"
                   type="text"
-                  @click:append="toggleMarker"
-                  @click:append-outer="sendMessage"
+                  @click="openDrawer"
                   @click:clear="clearMessage"
                 ></v-text-field>
               </v-col>
@@ -53,9 +51,17 @@
 
 
 <script>
+import {EventBus} from '../../lib/eventBus';
+import  Map from './Map'
+
+
+
+
 export default {
+  
   data: () => ({
     password: "Password",
+    drawer:true,
     show: false,
     departure: "",
     arrival:"",
@@ -64,21 +70,26 @@ export default {
     
   }),
 
-  computed: {
-   
-  },
+  components: {
+   Map,
+  }, 
 
   methods: {
-    toggleMarker() { 
-      this.departure= "current location";
+    getMylocation() { 
+      getMyloca.get_my_location().then(res => {
+     this.departure= "current Location";
+      })
     },
     sendMessage() { // arrival && departure complite 
       
     },
     clearMessage() {
       this.message = "";
+    },
+    openDrawer(){
+      EventBus.$emit('triggerEventBus',this.drawer);
+    
     }
-   
-  },
+ },
 };
 </script>

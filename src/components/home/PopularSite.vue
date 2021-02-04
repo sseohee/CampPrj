@@ -40,8 +40,6 @@ export default {
  created(){
      popularApi.getPopular().then(res => {
      this.populars =[].concat(res.data);
-     
-
      })
  }
 }

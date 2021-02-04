@@ -13,7 +13,7 @@ import Header from './components/Header.vue';
 
 export default {
   mounted() {
-    $.initialize();
+    //$.initialize();
   },
 
   components: {

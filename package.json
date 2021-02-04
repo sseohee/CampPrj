@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service --host 0.0.0.0 --disableHostCheck true serve",
+    "serve": "vue-cli-service serve --open --port 80",
     "build": "vue-cli-service build"
   },
   "dependencies": {
@@ -25,7 +25,8 @@
     "sass-loader": "^10.0.0",
     "vue-cli-plugin-vuetify": "~2.1.0",
     "vue-template-compiler": "^2.6.11",
-    "vuetify-loader": "^1.7.0"
+    "vuetify-loader": "^1.7.0",
+    "webpack": "^4.46.0"
   },
   "browserslist": [
     "> 1%",

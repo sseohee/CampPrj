@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="Home">
    <v-app>
      <split style="height: 600px;">
        <SplitArea :size="30">
@@ -34,17 +34,17 @@
 import Popular from '@/components/home/PopularSite.vue'
 import Map from '@/components/home/Map.vue'
 import Searching from '@/components/home/Searching.vue'
-import SearchList from '../components/home/SearchList.vue'
+import ListSearch from '../components/home/ListSearch.vue'
 
 export default {
   
   
-  name: 'home',
+  name: 'Home',
   components: {
    Popular ,
    Map,
    Searching,
-    SearchList
+    ListSearch
   }
 }
 </script>
