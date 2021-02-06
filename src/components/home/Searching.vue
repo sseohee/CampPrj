@@ -6,7 +6,7 @@
           <v-container>
             <v-row>
               <v-col cols="12">
-                <v-text-field
+                <v-text-field id="start_position_text"
                   v-model="departure"
                   :append-icon="
                   marker ? 'mdi-map-marker' : 'mdi-map-marker'"
@@ -15,7 +15,8 @@
                   clearable
                   label="Departure"
                   type="text"
-                  @click:append="getMylocation" 
+                  placeholder="출발지를 입력하세요"
+                  @click:append="Mylocation" 
                   @click:clear="clearMessage"
                 ></v-text-field>
               </v-col>
@@ -36,6 +37,7 @@
                   clearable
                   label="Arrival"
                   type="text"
+                  placeholder="도착지를 입력하세요"
                   @click="openDrawer"
                   @click:clear="clearMessage"
                 ></v-text-field>
@@ -53,6 +55,8 @@
 <script>
 import {EventBus} from '../../lib/eventBus';
 import  Map from './Map'
+// import CurrentLoca from '@/api-ajax/action';
+
 
 
 
@@ -66,7 +70,8 @@ export default {
     departure: "",
     arrival:"",
     marker: true,
-    iconIndex: 0
+    iconIndex: 0,
+    
     
   }),
 
@@ -75,11 +80,22 @@ export default {
   }, 
 
   methods: {
-    getMylocation() { 
-      getMyloca.get_my_location().then(res => {
-     this.departure= "current Location";
-      })
-    },
+    Mylocation(){
+        EventBus.$emit('mylocationEventBus',true);
+       
+          function myLocationText() {
+            var myLocationText="";
+            navigator.geolocation.getCurrentPosition(function(position) {
+                alert("위도 : " + position.coords.latitude + "\n" + "경도 : " + position.coords.longitude);
+                var lat = position.coords.latitude;
+                var lon = position.coords.longitude;
+              return myLocationText=lat + lon;
+            }); 
+          myLocationText() 
+          vm.departure=myLocationText;
+    }}
+      
+    ,
     sendMessage() { // arrival && departure complite 
       
     },
@@ -91,5 +107,9 @@ export default {
     
     }
  },
+ mounted(){
+    
+
+ }
 };
 </script>

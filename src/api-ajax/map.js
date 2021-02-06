@@ -1,9 +1,6 @@
-
-
-
 var markers = []; 
 var map=null;
-class Map {
+export default class Map {
     static initMap() {
         map = new naver.maps.Map('naverMap', {
             center: new naver.maps.LatLng(37.3595704, 127.105399),
@@ -29,11 +26,11 @@ class Map {
         get_markers();
     }
 
-    static change_map_center(latitude, longitude){
+    change_map_center(latitude, longitude){
         var position = new naver.maps.LatLng(latitude,longitude);
         map.setCenter(position);
     }
-    static make_marker(latitude,longitude){
+    make_marker(latitude,longitude){
         var position = new naver.maps.LatLng(latitude,longitude);
         var marker = new naver.maps.Marker({
             map: map,
@@ -41,7 +38,7 @@ class Map {
         });
         return marker
     }
-    static get_markers() {
+    get_markers() {
         $.get('/get_every_camping_locations', function (datas) {
             jsonData  = JSON.parse(datas);
             jsonData.forEach(function(data){
@@ -67,7 +64,7 @@ class Map {
         });
     };
 
-    static get_infowindow(data){
+    get_infowindow(data){
         var contentString = [
             '<div class="iw_inner">',
             '   <h3>'+data["CITY"]+'</h3>',
@@ -83,11 +80,11 @@ class Map {
         return infowindow;
     }
 
-    static load_modal(){
+    load_modal(){
         $("#myModal").modal();
     }
 
-    static updateMarkers(map, markers) {
+    updateMarkers(map, markers) {
         var mapBounds = map.getBounds();
         var marker, position;
         for (var i = 0; i < markers.length; i++) {
@@ -103,14 +100,14 @@ class Map {
         }
     }
 
-    static showMarker(map, marker) {
+    showMarker(map, marker) {
         if (marker.setMap()) return;
         marker.setMap(map);
     }
 
-    static hideMarker(map, marker) {
+    hideMarker(map, marker) {
         if (!marker.setMap()) return;
         marker.setMap(null);
     }
 
-}export default Map;
+};

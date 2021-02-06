@@ -34,6 +34,7 @@ import Map from '@/components/home/Map.vue'
 import Searching from '@/components/home/Searching.vue'
 import ListSearch from '../components/home/ListSearch.vue'
 
+
 export default {
   
   
