@@ -1,10 +1,11 @@
 <template>
    <div id ="app">
      <Header/>
-      <router-view />
+      <router-view style="padding-top:30px"/>
      <Footer/>
    </div>
 </template>
+
 
 <script>
 import Footer from './components/Footer.vue';

@@ -1,7 +1,4 @@
-
-
-
-module.exports = {
+ports = {
   devServer:{
 
     host: '0.0.0.0',

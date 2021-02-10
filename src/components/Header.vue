@@ -2,13 +2,13 @@
   <v-card class="overflow-hidden">
     <v-app-bar
       absolute
-      color="white"
+      color="#669966"
       elevate-on-scroll
       scroll-target="#scrolling-techniques-7"
     >
      
 
-      <v-toolbar-title>Smart_CarCamping</v-toolbar-title>
+      <v-toolbar-title>Smart 캠핑 차박 추천 서비스</v-toolbar-title>
 
       <v-spacer></v-spacer>
 

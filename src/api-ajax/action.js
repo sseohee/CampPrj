@@ -46,8 +46,7 @@ function search() {
   }
 }
 
-var get_my_location_btn = document.querySelector("#get_my_location_btn");
-get_my_location_btn.addEventListener("click", get_my_location);
+
 var search_location_btn = document.querySelector("#city_selection_btn")
 search_location_btn.addEventListener("click", select_city);
 var get_destination_btn = document.querySelector("#set_destination_btn");

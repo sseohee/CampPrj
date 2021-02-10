@@ -1,20 +1,34 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import CampingSearch from "../views/CampingSearch.vue"
+import Main from '../views/Main.vue'
+import Potal from "../views/Potal.vue"
+import Mycamping from "../views/Mycamping.vue"
+
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'Main',
+    component: Main
   },
   
   {
-    path: '/campingSearch',
-    name: 'CampingSearch',
-    component: CampingSearch
+    path: '/home',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/potal',
+    name: 'Potal',
+    component: Potal
+  }
+  ,
+  {
+    path: '/mycamping',
+    name: 'Mycamping',
+    component: Mycamping
   }
 ]
 

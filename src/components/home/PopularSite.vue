@@ -2,9 +2,10 @@
   <v-card
     tile
     style="width: 100%" 
+    v-if="popular"
   >
     <v-list rounded>
-      <v-subheader>Popular CampingSite</v-subheader>
+      <v-subheader>인기 검색지</v-subheader>
       <v-list-item-group
         v-model="selectedItem"
         color="primary"
@@ -34,7 +35,8 @@ export default {
      
      return {
          populars:[],
-         selectedItem: 1
+         selectedItem: 1,
+         popular:true //도착지 입력시 fasle로 변환하여 인기검색지 감추기 
      }
  },
  created(){
