@@ -67,4 +67,5 @@ function edit_modal() {
       console.log(error);
     }
   });
+  
 }

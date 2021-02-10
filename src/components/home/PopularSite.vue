@@ -5,7 +5,7 @@
     v-if="popular"
   >
     <v-list rounded>
-      <v-subheader>Popular CampingSite</v-subheader>
+      <v-subheader>인기 검색지</v-subheader>
       <v-list-item-group
         v-model="selectedItem"
         color="primary"

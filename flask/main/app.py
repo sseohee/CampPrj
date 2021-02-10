@@ -17,8 +17,13 @@ def to_json_array(results):
 def init_view():
     return render_template("index.html")
 
+@app.route('/home')   
+def vue_main():
+  return render_template("index.html")
+
 # @app.route('/search')
 #     return 
+
 
 @app.route('/get_every_camping_locations')
 def get_campings():
@@ -77,4 +82,4 @@ def view_review(user):
 if __name__=='__main__':
     # ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS)
     # ssl_context.load_cert_chain(certfile='newcert.pem',keyfile='newkey.pem',password='secret')
-    app.run(host='0.0.0.0',port=5000,debug=True,ssl_context = ('/work/vueapp/carprj/flask/server.crt','/work/vueapp/carprj/flask/server.key'))
+    app.run(host='0.0.0.0',port=5000,debug=True,ssl_context = ('/data/works/test/flask/server.crt','/data/works/test/flask/server.key'))

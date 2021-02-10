@@ -13,13 +13,13 @@
                   filled
                   clear-icon="mdi-close-circle"
                   clearable
-                  label="Departure"
+                  label="출발지"
                   type="text"
                   placeholder="출발지를 입력하세요"
                   @click:append="Mylocation" 
                   @click:clear="clearMessage"
+                  style="width:100%"
                 ></v-text-field>
-              </v-col>
             </v-row>
           </v-container>
         </v-form>
@@ -35,7 +35,7 @@
                   filled
                   clear-icon="mdi-close-circle"
                   clearable
-                  label="Arrival"
+                  label="도착지"
                   type="text"
                   placeholder="도착지를 입력하세요"
                   @click="openDrawer"
@@ -82,18 +82,19 @@ export default {
   methods: {
     Mylocation(){
         EventBus.$emit('mylocationEventBus',true);
-       
-          function myLocationText() {
-            var myLocationText="";
-            navigator.geolocation.getCurrentPosition(function(position) {
-                alert("위도 : " + position.coords.latitude + "\n" + "경도 : " + position.coords.longitude);
-                var lat = position.coords.latitude;
-                var lon = position.coords.longitude;
-              return myLocationText=lat + lon;
-            }); 
-          myLocationText() 
-          vm.departure=myLocationText;
-    }}
+        var myLocationText="";
+      navigator.geolocation.getCurrentPosition(function(position) {
+          alert("위도 : " + position.coords.latitude + "\n" + "경도 : " + position.coords.longitude);
+          var lat = position.coords.latitude;
+          var lon = position.coords.longitude;
+          
+          myLocationText=lat + lon;
+          
+      }); this.departure="mylocationText";
+    }    
+        
+    
+    
       
     ,
     sendMessage() { // arrival && departure complite 

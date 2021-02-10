@@ -5,7 +5,7 @@ import store from './store/index'
 import vuetify from './plugins/vuetify';
 import Vuetify from 'vuetify';
 import VueSplit from "vue-split-panel";
-// import 'expose-loader?$!expose-loader?jQuery!jquery'
+//import 'expose-loader?$!expose-loader?jQuery!jquery'
 
 Vue.config.productionTip = false
 
