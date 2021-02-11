@@ -18,6 +18,12 @@ def to_json_array(results):
 def init_view():
     return render_template("index.html")
 
+@app.route('/ranking')
+def get_top_ten():
+    camping_dao = CampingDao()
+    top_ten = camping_dao.get_top_ten_viewed()
+    result_json = to_json_array(top_ten)
+    return result_json
 # @app.route('/search')
 #     return 
 
@@ -26,31 +32,23 @@ def get_campings():
     camping_dao = CampingDao()
     searching_result = camping_dao.get_every_camping_locations()
     result_json = to_json_array(searching_result)
-    return result_json
+    return result_json 
 
 @app.route('/search',methods=['GET','POST'])
 def search():
     camping_dao = CampingDao()
     data = []
-    if request.method == 'GET':
-        searched_text = request.args["destination"]
-        try:
-            camping_info = camping_dao.search_camping_info(searched_text)
-        except:
-            print("error occured")
-        if camping_info != []: 
-            data = to_json_array(camping_info)
-        else :
-            data = []
-    else:
-        sido = request.form["sido"]
-        gu = request.form["gu"]
+    sido= request.args["sido"]
+    gu = request.args["gu"]
+    try:
+        camping_info = camping_dao.search_camping_info(sido,gu)
         print(sido+gu)
-        try:
-            data = camping_dao.search_camping_info(sido,gu)
-            print(data)
-        except:
-            print("error occured")
+    except:
+        print("error occured")
+    if camping_info != []: 
+        data = to_json_array(camping_info)
+    else :
+        data = []
     return jsonify(data)
 
 
@@ -61,26 +59,11 @@ def main():
         return search_results(search)
     return render_template("search_side_bar.html",form=search)
 
-# @app.route('/results')
-# def search_results(search):
-#     results = []
-#     search_string = search.data['']
-#     return results
-
-@app.route('/ranking')
-def get_ranking():
-    camping_dao = CampingDao()
-    # ranking = []
-    ranking = camping_dao.get_camping_ranking()
-    print(ranking)
-    return ranking 
-# return top ranking camping sites via theme  ex) age, weather etc..
-
 @app.route('/community')
 def view_review(user):
     return render_template("community.html")
 
-# ###### login - parts ##########
+# ###### login - ssparts ##########
 # @app.route('/login',methods=['GET','POST'])
 # def login():
 
