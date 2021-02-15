@@ -20,10 +20,10 @@
             <!-- logged in already -->
             {% if 'username' in session %}
             <!-- profile field -->
-            <!-- <a href="/logout">log out</a> -->
+            <a href="/logout">log out</a>
 
             {% else %}
-            <!-- <a href="/login">log in</a> -->
+            <a href="/login">log in</a>
             <!-- log out field -->
             {% endif %}
         <!-- </nav> -->
@@ -127,6 +127,9 @@
         <select name="sido1" id="sido" class="w3-select"></select>
         <select name="gugun1" id="gugun" class="w3-select"></select>
         <button id="city_selection_btn">select</button>
+    </div>
+    <div id = "candidated_list">
+            
     </div>
     <button class="w3-button w3-green w3-xlarge w3-right"  onclick="openRightMenu()">&#9776;</button>
 </aside>

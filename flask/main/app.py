@@ -1,6 +1,7 @@
 from flask import Flask, render_template,request, session, redirect, url_for
 import logging
 import json
+from flask import flash, make_response, jsonify
 from model.destinationForm import DestinationForm
 from model.camping_dao import CampingDao
 from model.dbModule import Database
@@ -33,6 +34,12 @@ def vue_main():
 # @app.route('/search')
 #     return 
 
+@app.route('/ranking')
+def get_top_ten():
+    camping_dao = CampingDao()
+    top_ten = camping_dao.get_top_ten_viewed()
+    result_json = to_json_array(top_ten)
+    return result_json
 
 @app.route('/get_every_camping_locations')
 def get_campings():
@@ -41,24 +48,20 @@ def get_campings():
     result_json = to_json_array(searching_result)
     return result_json
 
-@app.route('/search',methods=['GET','POST'])
+@app.route('/search')
 def search():
     camping_dao = CampingDao()
-    if request.method == 'GET':
-        searched_text = request.args["destination"]
-        print(searched_text)
-        camping_info = camping_dao.get_camping_info(searched_text)
-        if camping_info != None: 
-            data = to_json_array(camping_info)
-        else :
-            data = None
-    else:
-        sido = request.form["sido"]
-        gu = request.form["gu"]
-        camping_dao.get_camping_info(sido,gu)
-    # print(data)
+    data = []
+    sido= request.args["sido"]
+    gu = request.args["gu"]
+    try:
+        camping_info = camping_dao.search_camping_info(sido,gu)
+        print(sido+gu)
+    except:
+        print("error occured")
+    if camping_info != []: 
+        data = to_json_array(camping_info)
     return data
-    # TODO : which to input which to search
 
 @app.route('/main',methods = ['GET','POST'])
 def main():
@@ -67,18 +70,6 @@ def main():
         return search_results(search)
     return render_template("search_side_bar.html",form=search)
 
-# @app.route('/results')
-# def search_results(search):
-#     results = []
-#     search_string = search.data['']
-#     return results
-
-@app.route('/ranking/<theme>')
-def get_ranking(theme):
-    ranking = []
-    sql = "select * rank() over(order by desc) as ranking where from"
-    return ranking 
-# return top ranking camping sites via theme  ex) age, weather etc..
 
 @app.route('/community')
 def view_review(user):

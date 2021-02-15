@@ -50,20 +50,46 @@ function dest_position_text(){
 }
 
 
+function show_candidated_list(places){
+  var candidated_list_container = document.querySelector("#candidated_list");
+  places.forEach(element => {
+    var li = document.createElement("li");
+    var text_value = document.createTextNode(element);
+    li.appendChild(text_value);
+  });
+}
+
+
 function select_city() {
-  var sido = document.querySelector("sido").value;
-  var gu = document.querySelector("gugun").value;
+  var sido = document.querySelector("#sido").value;
+  var gu = document.querySelector("#gugun").value;
+  var result;
   $.ajax({
-    type: 'POST',
-    url: '/search',
+    url: "/search",
+    type: "GET",
+    async: true,
     data: {
-      'sido': sido,
-      'gu': gu
+      "sido": sido,
+      "gu": gu,
     },
-    success: function (msg) {
-      alert(msg);
+    success: function (data) {
+      show_candidated_list(data);
+      alert(data);
+    },
+    error: function (e) {
+      alert("값을 가져오지 못했습니다.");
+      print(e);
     }
-  }); 
+  });
+}
+
+function show_ranking(){
+  var ranking_container = document.querySelector("#ranking_container");
+  $.get('/ranking',function (data) {
+    console.log(data);
+    console.log("he");
+    ranking_container.innerHTML = data;
+  });
 }
 // search function 
 function search() {
@@ -95,6 +121,9 @@ var search_location_btn = document.querySelector("#city_selection_btn")
 search_location_btn.addEventListener("click", select_city);
 var set_destination_btn = document.querySelector("#set_destination_btn");
 set_destination_btn.addEventListener("click", search);
+
+var rankings = document.querySelector("#ranking_container");
+rankings.onload = show_ranking();
 
 function edit_modal() {
   $.ajax({
