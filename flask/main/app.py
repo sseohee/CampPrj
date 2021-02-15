@@ -5,8 +5,17 @@ from model.destinationForm import DestinationForm
 from model.camping_dao import CampingDao
 from model.dbModule import Database
 
+class MyFlask(Flask): 
+    jinja_options = Flask.jinja_options.copy()
+    jinja_options.update(dict(
+        variable_start_string='%%',  # Default is '{{', I'm changing this because Vue.js uses '{{' / '}}'
+        variable_end_string='%%',
+))
+
+
+
 # logging.basicConfig(filename="logs/project.log",level = logging.DEBUG)
-app = Flask(__name__)
+app = MyFlask(__name__)
 app.secret_key = f"#!#FSFSD#$$hf*^~io"
 
 def to_json_array(results):
@@ -81,5 +90,6 @@ def view_review(user):
 
 if __name__=='__main__':
     # ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS)
-    # ssl_context.load_cert_chain(certfile='newcert.pem',keyfile='newkey.pem',password='secret')
-    app.run(host='0.0.0.0',port=5000,debug=True,ssl_context = ('/data/works/test/flask/server.crt','/data/works/test/flask/server.key'))
+    #ssl_context.load_cert_chain(certfile='newcert.pem',keyfile='newkey.pem',password='secret')
+    app.run(host='0.0.0.0',port=5000,debug=True,ssl_context = ('/data/works/test_copy1/flask/server.crt','/data/works/test_copy1/flask/server.key'))
+

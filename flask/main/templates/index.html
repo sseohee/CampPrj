@@ -2,34 +2,122 @@
 <html lang="en">
     
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="icon" href="/favicon.ico">
-    <title>test</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=2bkpqttxm3&&callback=initMap"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <link href="../static/css/app.8df55ae1.css" rel="preload" as="style">
-    <link href="../static/css/chunk-vendors.56c915a6.css" rel="preload" as="style">
-    <link href="../static/js/app.ac6b0da6.js" rel="preload" as="script">
-    <link href="../static/js/chunk-vendors.f9e44bac.js" rel="preload" as="script">
-    <link href="../static/css/chunk-vendors.56c915a6.css" rel="stylesheet">
-    <link href="../static/css/app.8df55ae1.css" rel="stylesheet">
-    <script src="../static/js/action.js"></script>
-    <script src="../static/js/map.js"></script>
-    
+    <meta charset="UTF-8">
+    <title>Camping Project</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <link href="../static/css/style.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
 
-<body><noscript><strong>We're sorry but test doesn't work properly without JavaScript enabled. Please enable it to
-            continue.</strong></noscript>
-    <div id="app"></div>
-    <div id="map"></div>
-    <script src="../static/js/chunk-vendors.f9e44bac.js"></script>
-    <script src="../static/js/app.ac6b0da6.js"></script>
-</body>
+<body>
+    <div id="app">
+<!-- header -->
+<div>
+<v-card class="overflow-hidden">
+<v-app-bar
+    absolute
+    color="#669966"
+    elevate-on-scroll
+    scroll-target="#scrolling-techniques-7"
+>
+    <v-toolbar-title>Smart 캠핑 차박 추천 서비스</v-toolbar-title>
+    <v-spacer></v-spacer>
+    <v-btn icon>
+    <v-icon>mdi-login</v-icon>
+    </v-btn>
 
+    <v-btn icon>
+    <v-icon>mdi-dots-vertical</v-icon>
+    </v-btn>
+</v-app-bar>
+<v-sheet
+    id="scrolling-techniques-7" 
+    class="overflow-y-auto"
+    max-height="50">
+
+</v-sheet>
+</v-card>
+
+</div>
+
+    <!-- body -->
+<div id="main">
+        <v-container>
+            <v-row class="row-group">
+                <v-col>
+                    <v-btn id="main_btn" color="secondary" elevation="5" fab large x-large style="color:#669966;" href="/main">캠핑/차박
+                        검색
+                    </v-btn>
+                </v-col>
+
+                <v-col>
+                    <v-btn id="main_btn" color="secondary" elevation="5" fab large x-large style="color:#669966;" href="/community">포탈
+                    </v-btn>
+                </v-col>
+                <v-col>
+                    <v-btn id="main_btn" color="secondary" elevation="5" fab large x-large style="color:#669966;" href="/mycamping">
+                        마이캠핑</v-btn>
+                </v-col>
+            </v-row>
+        </v-container>
+
+    </div>
+
+
+
+
+        <!-- footer -->
+    <div>
+    <v-footer color="#669966" padless style="width: 100%">
+        <v-card
+            flat
+            tile
+            class="indigo lighten-1 white--text text-center"
+            color="#669966"
+        >
+            <v-card-text>
+            <v-btn v-for="icon in icons" :key="icon" class="mx-4 white--text" icon>
+                <v-icon size="24px">
+                {{ icon }}
+                </v-icon>
+            </v-btn>
+            </v-card-text>
+    
+            <v-card-text class="white--text pt-0"> </v-card-text>
+            <v-divider></v-divider>
+    
+            <v-card-text class="white--text">
+            <strong>Vuetify</strong>
+            </v-card-text>
+        </v-card>
+        </v-footer>   
+        
+        
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script>
+        window.onload = function () {
+            var app = new Vue({
+                el: '#app',
+                vuetify: new Vuetify(),
+                data: {
+                    icons: ["mdi-facebook", "mdi-twitter", "mdi-linkedin", "mdi-instagram"],
+                }
+            })
+        }
+    </script>
+
+
+</body>
+<style>
+
+</style>
 </html>
