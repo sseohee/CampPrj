@@ -52,11 +52,11 @@ function dest_position_text(){
 
 function show_candidated_list(places){
   var candidated_list_container = document.querySelector("#candidated_list");
-  places.forEach(element => {
+  for(var element in places){
     var li = document.createElement("li");
     var text_value = document.createTextNode(element);
     li.appendChild(text_value);
-  });
+  }
 }
 
 

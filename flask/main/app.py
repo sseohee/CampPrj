@@ -82,5 +82,5 @@ def view_review(user):
 if __name__=='__main__':
     # ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS)
     #ssl_context.load_cert_chain(certfile='newcert.pem',keyfile='newkey.pem',password='secret')
-    app.run(host='0.0.0.0',port=5000,debug=True,ssl_context = ('/data/works/test_copy1/flask/server.crt','/data/works/test_copy1/flask/server.key'))
+    app.run(host='0.0.0.0',port=5000,debug=True,ssl_context = ('/work/vueapp/carprj/flask/server.crt','/work/vueapp/carprj/flask/server.key'))
 
