@@ -16,7 +16,7 @@ async function get_my_location() {
     var lon = position.coords.longitude;
     myLocationText={"lat":lat,"lon":lon};
     console.log(myLocationText);
-    console.log(position.coords.latitude);
+    
 });
 }
 
