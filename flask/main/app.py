@@ -24,8 +24,6 @@ def get_top_ten():
     top_ten = camping_dao.get_top_ten_viewed()
     result_json = to_json_array(top_ten)
     return result_json
-# @app.route('/search')
-#     return 
 
 @app.route('/get_every_camping_locations')
 def get_campings():
@@ -34,7 +32,7 @@ def get_campings():
     result_json = to_json_array(searching_result)
     return result_json 
 
-@app.route('/search',methods=['GET','POST'])
+@app.route('/search')
 def search():
     camping_dao = CampingDao()
     data = []
@@ -47,9 +45,7 @@ def search():
         print("error occured")
     if camping_info != []: 
         data = to_json_array(camping_info)
-    else :
-        data = []
-    return jsonify(data)
+    return data
 
 
 @app.route('/main',methods = ['GET','POST'])

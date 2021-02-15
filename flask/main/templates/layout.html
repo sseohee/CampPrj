@@ -51,8 +51,6 @@
                     var area15 = ["거제시", "김해시", "마산시", "밀양시", "사천시", "양산시", "진주시", "진해시", "창원시", "통영시", "거창군", "고성군", "남해군", "산청군", "의령군", "창녕군", "하동군", "함안군", "함양군", "합천군"];
                     var area16 = ["서귀포시", "제주시", "남제주군", "북제주군"];
 
-
-
                     // 시/도 선택 박스 초기화
 
                     $("select[name^=sido]").each(function () {
@@ -81,9 +79,12 @@
                 });
             </script>
             <br>
-            <select name="sido1" id="sido"></select>
-            <select name="gugun1" id="gugun"></select>
-            <button id="city_selection_btn">select<button>
+            <select name="sido" id="sido"></select>
+            <select name="gugun" id="gugun"></select>
+            <button id="city_selection_btn">선택<button>
+        </div>
+        <div id = "candidated_list">
+            
         </div>
         <button class="w3-button w3-teal w3-xlarge w3-right" onclick="openRightMenu()">&#9776;</button>
 

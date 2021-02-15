@@ -13,19 +13,19 @@ class CampingDao:
             sql = """SELECT INFO.CAMPING_INDEX, INFO.NAME, POPULARITY.SCORE FROM CAMPING_INFO as INFO INNER JOIN CAMPING_POPULARITY as POPULARITY ON INFO.CAMPING_INDEX = POPULARITY.CAMPING_INDEX ORDER BY SCORE LIMIT 10;"""
             results = db_class.executeAll(sql)
         except:
-            print("failed")
+            print("오류 발생")
         return results
 # 20200103 01 -> search counts
 # rank() mysql . 
 
-    def search_camping_info(self,sido,gu):
+    def search_camping_info(self,sido,gu): 
         result = None
         db_class = Database()
         sql = "SELECT * FROM CAMPING_INFO INFO WHERE INFO.CAMPING_INDEX IN (SELECT ADDRESS.CAMPING_INDEX FROM CAMPING_ADDRESS ADDRESS WHERE ADDRESS.REGION= '"+sido+"' AND ADDRESS.CITY='"+gu+"');"
         try:
             result = db_class.executeAll(sql)
         except:
-            print("failed")
+            print("오류 발생")
         return result
         # recommanded searching results
 
@@ -35,7 +35,7 @@ class CampingDao:
         try:
             result = db_class.executeAll(sql)
         except:
-            print("failed")
+            print("오류 발생")
         return result
 
     def get_camping_addresses(self,name):
@@ -44,7 +44,7 @@ class CampingDao:
         try:
             result = db_class.executeAll(sql)
         except:
-            print("failed") 
+            print("오류 발생") 
         return result
 
     def get_every_camping_locations(self):
@@ -54,6 +54,6 @@ class CampingDao:
         try:
             results = db_class.executeAll(sql)
         except:
-            print("failed")
+            print("오류 발생")
         return results
     

@@ -39,21 +39,20 @@ function make_marker(latitude, longitude) {
     return marker
 }
 function ax_to_address(lat, lon) {
-    console.log("im in");
     $.ajax({
         type : "GET",
         beforeSend:function(request){
-            request.setRequestHeader('X-NCP-APIGW-API-KEY-ID','2bkpqttxm3');
-            request.setRequestHeader('X-NCP-APIGW-API-KEY','kZSQeOjCRNhlA1x2AbsXPPlGH3LWy78EOjr99crq');
+            request.setRequestHeader("X-NCP-APIGW-API-KEY-ID","2bkpqttxm3");
+            request.setRequestHeader("X-NCP-APIGW-API-KEY","kZSQeOjCRNhlA1x2AbsXPPlGH3LWy78EOjr99crq");
         },
-        url :"https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc",
+        url : "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?request=coordsToaddr&coords=127.1133567,35.2982640&sourcecrs=epsg:4326&output=xml",
         success:function(data){
             console.log(data);
             alert(data);
             return data;
         },
         error: function(e){
-            alert("fuck");
+            alert(e);
         },
     });
 }

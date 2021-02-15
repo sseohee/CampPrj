@@ -14,6 +14,15 @@ async function get_my_location() {
   navigator.geolocation.getCurrentPosition(geoSuccess);
 }
 
+function show_candidated_list(places){
+  var candidated_list_container = document.querySelector("#candidated_list");
+  places.forEach(element => {
+    var li = document.createElement("li");
+    var text_value = document.createTextNode(element);
+    li.appendChild(text_value);
+  });
+}
+
 function select_city() {
   var sido = document.querySelector("#sido").value;
   var gu = document.querySelector("#gugun").value;
@@ -27,6 +36,7 @@ function select_city() {
       "gu": gu,
     },
     success: function (data) {
+      show_candidated_list(data);
       alert(data);
     },
     error: function (e) {
