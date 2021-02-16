@@ -22,7 +22,35 @@ src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=2bkpqttxm3&&su
             </div>
         </div>
     </div>
+    <!-- ranking vue -->
+
     <div id="ranking_container">
+        <v-card
+        tile
+        style="width: 100%" 
+        v-if="popular"
+      >
+        <v-list rounded>
+          <v-subheader>인기 검색지</v-subheader>
+          <v-list-item-group
+            v-model="selectedItem"
+            color="primary"
+          >
+            <v-list-item
+              v-for="(popular, i) in populars"
+              :key="i"
+            >
+              <v-list-item-content>
+                <v-title v-text="popular.title">{{popular.title}}</v-title>
+              </v-list-item-content>
+              <v-list-item-content>
+                <v-list-item-title v-text="popular.campingsite"></v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
+      </v-card>
+
 
     </div>
 </div>
@@ -63,4 +91,13 @@ src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=2bkpqttxm3&&su
         </div>
     </div>
 </div>
+
+<!-- vue script -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+
 {% endblock %}

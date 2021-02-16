@@ -17,6 +17,9 @@ div#header {
     height: 90%;
 
 }
+.buttons {
+    height: 150px;
+}
 
 .main_contents{
     height:700px;

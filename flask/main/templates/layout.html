@@ -16,7 +16,7 @@
 </head>
 
 <body> 
-        <!-- <nav> -->
+        <nav> 
             <!-- logged in already -->
             {% if 'username' in session %}
             <!-- profile field -->
@@ -26,7 +26,7 @@
             <a href="/login">log in</a>
             <!-- log out field -->
             {% endif %}
-        <!-- </nav> -->
+         </nav>
 
         <!-- header -->
         
@@ -195,6 +195,33 @@
                     icons: ["mdi-facebook", "mdi-twitter", "mdi-linkedin", "mdi-instagram"],
                 }
             })
+
+            var ranking = new Vue({
+                el: '#ranking_container',
+                vuetify: new Vuetify(),
+                data: {
+                
+                    populars:[],
+                    selectedItem: 1,
+                    popular:true //도착지 입력시 fasle로 변환하여 인기검색지 감추기 
+                
+                
+                },
+                created(){
+                    axios.get('https://api.mocki.io/v1/559abadc')
+                            .then(function(response){
+                                console.log(response.data); // 객체 형태로 반환. 파싱작업 불필요
+                                this.populars =[].concat(JSON.stringify(response.data));
+                                console.log(this.populars+"==>test");
+                                console.log(this.populars.title);
+                            });
+                        
+                        }
+            })
+
+
+
+
         
 
     </script>

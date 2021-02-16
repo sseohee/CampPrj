@@ -1,4 +1,4 @@
-from flask import Flask, render_template,request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for
 import logging
 import json
 from flask import flash, make_response, jsonify
@@ -6,33 +6,39 @@ from model.destinationForm import DestinationForm
 from model.camping_dao import CampingDao
 from model.dbModule import Database
 
-class MyFlask(Flask): 
+
+class MyFlask(Flask):
     jinja_options = Flask.jinja_options.copy()
     jinja_options.update(dict(
-        variable_start_string='%%',  # Default is '{{', I'm changing this because Vue.js uses '{{' / '}}'
+        # Default is '{{', I'm changing this because Vue.js uses '{{' / '}}'
+        variable_start_string='%%',
         variable_end_string='%%',
-))
-
+    ))
 
 
 # logging.basicConfig(filename="logs/project.log",level = logging.DEBUG)
 app = MyFlask(__name__)
 app.secret_key = f"#!#FSFSD#$$hf*^~io"
 
+
 def to_json_array(results):
-    jsons =  json.dumps( [dict(ix) for ix in results] ) #CREATE JSON
+    jsons = json.dumps([dict(ix) for ix in results])  # CREATE JSON
     return jsons
+
 
 @app.route('/')
 def init_view():
     return render_template("index.html")
 
-@app.route('/home')   
-def vue_main():
-  return render_template("index.html")
 
-# @app.route('/search')
-#     return 
+@app.route('/home')
+def vue_main():
+    return render_template("index.html")
+
+# @app.route('/test')
+# def get_test():
+#     test_data=  
+
 
 @app.route('/ranking')
 def get_top_ten():
@@ -41,6 +47,7 @@ def get_top_ten():
     result_json = to_json_array(top_ten)
     return result_json
 
+
 @app.route('/get_every_camping_locations')
 def get_campings():
     camping_dao = CampingDao()
@@ -48,27 +55,29 @@ def get_campings():
     result_json = to_json_array(searching_result)
     return result_json
 
+
 @app.route('/search')
 def search():
     camping_dao = CampingDao()
     data = []
-    sido= request.args["sido"]
+    sido = request.args["sido"]
     gu = request.args["gu"]
     try:
-        camping_info = camping_dao.search_camping_info(sido,gu)
+        camping_info = camping_dao.search_camping_info(sido, gu)
         print(sido+gu)
     except:
         print("error occured")
-    if camping_info != []: 
+    if camping_info != []:
         data = to_json_array(camping_info)
     return data
 
-@app.route('/main',methods = ['GET','POST'])
+
+@app.route('/main', methods=['GET', 'POST'])
 def main():
     search = DestinationForm(request.form)
     if request.method == 'POST':
         return search_results(search)
-    return render_template("search_side_bar.html",form=search)
+    return render_template("search_side_bar.html", form=search)
 
 
 @app.route('/community')
@@ -79,8 +88,9 @@ def view_review(user):
 # @app.route('/login',methods=['GET','POST'])
 # def login():
 
-if __name__=='__main__':
-    # ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS)
-    #ssl_context.load_cert_chain(certfile='newcert.pem',keyfile='newkey.pem',password='secret')
-    app.run(host='0.0.0.0',port=5000,debug=True,ssl_context = ('/work/vueapp/carprj/flask/server.crt','/work/vueapp/carprj/flask/server.key'))
 
+if __name__ == '__main__':
+    # ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS)
+    # ssl_context.load_cert_chain(certfile='newcert.pem',keyfile='newkey.pem',password='secret')
+    app.run(host='0.0.0.0', port=5000, debug=True, ssl_context=(
+        '/data/works/test_copy2/flask/server.crt', '/data/works/test_copy2/flask/server.key'))

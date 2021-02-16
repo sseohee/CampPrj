@@ -12,20 +12,10 @@ async function get_my_location() {
   };
   navigator.geolocation.getCurrentPosition(geoSuccess);
   navigator.geolocation.getCurrentPosition(function(position) {
-    var lat = position.coords.latitude;
-    var lon = position.coords.longitude;
+    var lat = position.coords.latitude; // y
+    var lon = position.coords.longitude;// x
     myLocationText={"lat":lat,"lon":lon};
     console.log(myLocationText);
-    
-});
-}
-
-//reverse geocoding 
-function myLocationText(){
-  navigator.geolocation.getCurrentPosition(function(position) {
-    var lat = position.coords.latitude;  //y
-    var lon = position.coords.longitude; //x
-    myLocationText={"lat":lat,"lon":lon};
 
     naver.maps.Service.reverseGeocode({
       coords: new naver.maps.LatLng(myLocationText.lat, myLocationText.lon),
@@ -40,8 +30,32 @@ function myLocationText(){
       console.log(address);
   });
 
+    
 });
 }
+
+//reverse geocoding 
+// function myLocationText(){
+//   navigator.geolocation.getCurrentPosition(function(position) {
+//     var lat = position.coords.latitude;  //y
+//     var lon = position.coords.longitude; //x
+//     myLocationText={"lat":lat,"lon":lon};
+
+//     naver.maps.Service.reverseGeocode({
+//       coords: new naver.maps.LatLng(myLocationText.lat, myLocationText.lon),
+//   }, function(status, response) {
+//       if (status !== naver.maps.Service.Status.OK) {
+//           return alert('Something wrong!');
+//       }
+
+//       var result = response.v2, // 검색 결과의 컨테이너
+//           address = result.address.jibunAddress;  // 검색 결과로 만든 주소
+//       $('input[id=start_position_text]').attr('value',address);
+//       console.log(address);
+//   });
+
+// });
+// }
 
 //도착지 탭시 검색 레이어 활성화
 function dest_position_text(){
@@ -52,11 +66,11 @@ function dest_position_text(){
 
 function show_candidated_list(places){
   var candidated_list_container = document.querySelector("#candidated_list");
-  for(var element in places){
+  places.forEach(element => {
     var li = document.createElement("li");
     var text_value = document.createTextNode(element);
     li.appendChild(text_value);
-  }
+  });
 }
 
 
@@ -108,11 +122,12 @@ function search() {
     });
   }
 }
-
+window.onload = function(){
 var get_my_location_btn = document.querySelector("#get_my_location_btn");
 get_my_location_btn.addEventListener("click", get_my_location);
-var get_my_location_text = document.querySelector("#get_my_location_btn");
-get_my_location_btn.addEventListener("click", myLocationText);
+
+// var get_my_location_text = document.querySelector("#get_my_location_btn");
+// get_my_location_btn.addEventListener("click", myLocationText);
 
 var open_search_drawer = document.querySelector("#dest_position_text");
 open_search_drawer.addEventListener("click", dest_position_text);
@@ -125,6 +140,8 @@ set_destination_btn.addEventListener("click", search);
 var rankings = document.querySelector("#ranking_container");
 rankings.onload = show_ranking();
 
+}
+  
 function edit_modal() {
   $.ajax({
     url: '/search',
