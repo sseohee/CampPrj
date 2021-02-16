@@ -126,19 +126,45 @@
         <br>
         <select name="sido1" id="sido" class="w3-select"></select>
         <select name="gugun1" id="gugun" class="w3-select"></select>
-        <button id="city_selection_btn">select</button>
+        <button id="city_selection_btn" >select</button>
+        
+
+        <div id = "candidated_list">
+            <v-card
+            tile
+            style="width: 90%; margin-top:25px;" 
+            v-if="popular"
+          >
+            <v-list rounded>
+              <v-subheader>camping list</v-subheader>  
+              <v-list-item-group
+                v-model="selectedItem"
+                color="primary"
+              >
+                <v-list-item
+                  v-for="(popular, i) in populars"
+                  :key="i"
+                >
+                 
+                  <v-list-item-content>
+                    <v-list-item-title v-text="popular.campingsite"></v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list-item-group>
+            </v-list>
+          </v-card>
+        </div>
+    
     </div>
-    <div id = "candidated_list">
-            
-    </div>
+    
     <button class="w3-button w3-green w3-xlarge w3-right"  onclick="openRightMenu()">&#9776;</button>
 </aside>
 <section>
     <div class="main_contents">
     
-        <!-- Main content block -->
+        <!-- Main content search_side block -->
         {% block content %}{% endblock %}
-        <div id="map"></div>
+    <div id="map"></div>
     </div>
 </section>
     
@@ -180,6 +206,7 @@
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script>
             var header = new Vue({
                 el: '#header',
@@ -196,31 +223,30 @@
                 }
             })
 
-            var ranking = new Vue({
-                el: '#ranking_container',
+             var list = new Vue({
+                el: '#candidated_list',
                 vuetify: new Vuetify(),
                 data: {
                 
                     populars:[],
-                    selectedItem: 1,
-                    popular:true //도착지 입력시 fasle로 변환하여 인기검색지 감추기 
-                
+                    selectedItem: 0,
+                    popular:true, //도착지 입력시 fasle로 변환하여 인기검색지 감추기 
+                    test:"this is test"
                 
                 },
                 created(){
                     axios.get('https://api.mocki.io/v1/559abadc')
-                            .then(function(response){
+                            .then((response) => {
                                 console.log(response.data); // 객체 형태로 반환. 파싱작업 불필요
-                                this.populars =[].concat(JSON.stringify(response.data));
+                                this.populars =[].concat(response.data);
                                 console.log(this.populars+"==>test");
-                                console.log(this.populars.title);
+                                
+
                             });
                         
                         }
-            })
-
-
-
+            })          
+       
 
         
 

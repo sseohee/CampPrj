@@ -25,6 +25,7 @@ src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=2bkpqttxm3&&su
     <!-- ranking vue -->
 
     <div id="ranking_container">
+
         <v-card
         tile
         style="width: 100%" 
@@ -41,10 +42,11 @@ src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=2bkpqttxm3&&su
               :key="i"
             >
               <v-list-item-content>
-                <v-title v-text="popular.title">{{popular.title}}</v-title>
+                <v-title v-text="popular.title"> </v-title>
+                
               </v-list-item-content>
               <v-list-item-content>
-                <v-list-item-title v-text="popular.campingsite"></v-list-item-title>
+                <v-list-item-title v-text="popular.campingsite" @click="inputDest"></v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-list-item-group>
@@ -97,7 +99,41 @@ src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=2bkpqttxm3&&su
 <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+var ranking = new Vue({
+    el: '#ranking_container',
+    vuetify: new Vuetify(),
+    data: {
+    
+        populars:[],
+        selectedItem: 0,
+        popular:true, //도착지 입력시 fasle로 변환하여 인기검색지 감추기 
+        test:"this is test"
+    
+    },
+    created(){
+        axios.get('https://api.mocki.io/v1/559abadc')
+                .then((response) => {
+                    console.log(response.data); // 객체 형태로 반환. 파싱작업 불필요
+                    this.populars =[].concat(response.data);
+                    console.log(this.populars+"==>test");
+                    
+                    
+
+                });
+            
+            },
+
+    method:{
+        inputDest(){
+            console.log(this.selectedItem);
+
+        }
+    }
+})
 
 
+
+</script>
 
 {% endblock %}
