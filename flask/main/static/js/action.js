@@ -29,8 +29,6 @@ async function get_my_location() {
       $('input[id=start_position_text]').attr('value',address);
       console.log(address);
   });
-
-    
 });
 }
 
@@ -73,7 +71,6 @@ function show_candidated_list(places){
   });
 }
 
-
 function select_city() {
   var sido = document.querySelector("#sido").value;
   var gu = document.querySelector("#gugun").value;
@@ -105,6 +102,7 @@ function show_ranking(){
     ranking_container.innerHTML = data;
   });
 }
+
 // search function 
 function search() {
   var dest_position = document.querySelector("#dest_position_text").value;
