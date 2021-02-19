@@ -55,7 +55,6 @@ def get_campings():
     result_json = to_json_array(searching_result)
     return result_json
 
-
 @app.route('/search')
 def search():
     camping_dao = CampingDao()
@@ -71,12 +70,21 @@ def search():
         data = to_json_array(camping_info)
     return data
 
+@app.route('/viewed_count')
+def get_view_count():
+    camping_dao = CampingDao()
+    camping_index = 'CAMPING_INDEX 2'
+    date = '20200113'
+    time = '01'
+    # try:
+        # 1번째 인자는 캠핑 인덱스, 2번째 인자는 검색하려는 날짜, 3번째 인덱스는 검색하려는 시간을 의미합니다. 
+    count = camping_dao.get_viewed_count(camping_index, date,time)
+    print(count)
+    return count
 
 @app.route('/main', methods=['GET', 'POST'])
 def main():
-    search = DestinationForm(request.form)
-    if request.method == 'POST':
-        return search_results(search)
+    # if request.method == 'POST':
     return render_template("search_side_bar.html", form=search)
 
 

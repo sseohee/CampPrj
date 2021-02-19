@@ -38,9 +38,23 @@ class CampingDao:
             print("오류 발생")
         return result
 
+    def get_viewed_count(self,index,date,time):
+        count = 0 
+        db_class= Database()
+        sql = """SELECT JSON_EXTRACT(VIEWED_HISTORY_COUNT,'$.\""""+date+"""".\""""+time+""""') FROM CAMPING_POPULARITY WHERE CAMPING_INDEX =\""""+index+ "\";"
+        print(sql)
+        try:
+            count = db_class.execute(sql)
+        except:
+            print("error occured")
+        return str(count)
+    
+    # def set_viewed_count(self,index):
+    #     sql  
+
     def get_camping_addresses(self,name):
         db_class= Database()
-        sql = "Select * from CAMPING_ADDRESS where CAMPING_INDEX= "+index 
+        sql = "Select * from CAMPING_ADDRESS where CAMPING_NAME= "+name 
         try:
             result = db_class.executeAll(sql)
         except:
